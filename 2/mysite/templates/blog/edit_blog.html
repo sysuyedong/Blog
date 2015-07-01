@@ -1,0 +1,61 @@
+{% extends 'blog/base.html' %}
+ 
+{% block title %}Edit Blog{% endblock %}
+
+{% block head %}
+    <script type="text/javascript">
+        $(function(){
+            $('.summernote')
+                .on('summernote.change', function() {
+                    // $('.content_value').val($('.summernote').code())
+                })
+                .summernote(
+                    {height: 200}
+                );
+        $('form').on('submit', function (e) {
+            // e.preventDefault();
+            $('.content').val($('.summernote').code())
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('/static/img/post-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    {% if status %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>提交成功！</p>
+                <hr>
+                <a href="/blog/index/">返回</a>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+                <label>Title</label>
+                <input type="text" name="title" class="form-control1" placeholder="Title" id="name" required data-validation-required-message="Please enter Title.">
+                <p class="help-block text-danger"></p>{{title}}
+            </div>
+        </div>
+        <textarea class="summernote">{{content}}</textarea>
+        <input type="hidden" name="content" class="content"></input>
+        <input type="submit" value="submit" class="btn btn-default"></input>
+    </form>
+    {% endif %}
+{% endblock %}

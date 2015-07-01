@@ -1,0 +1,39 @@
+{% extends 'blog/base.html' %}
+ 
+{% block title %}Clean Blog - Login{% endblock %}
+
+{% block content %}
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('/static/img/home-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Clean Blog</h1>
+                        <hr class="small">
+                        <span class="subheading">A Clean Blog Theme by Start Bootstrap</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                {% if login_fail %}
+                <font color="#ff0000">Login fail! Please try agin.</font>
+                {% endif %}
+                <form action="" method="post">
+                    {% csrf_token %}
+                    Username: <input type="text" name="username"></input><br>
+                    Password: <input type="password" name="password"></input><br>
+                    <input type="submit" value="Login" class="btn btn-default"></input>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'blog/base.html' %}
+ 
+{% block title %}Blog of Ye{% endblock %}
+ 
+{% block content %}
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('/static/img/home-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Blog of Ye</h1>
+                        <hr class="small">
+                        <span class="subheading">Road to Game Developing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                {% for blog in blogs %}
+                <div class="post-preview">
+                    <a href="{% url 'blog_post' blog.id %}">
+                        <h2 class="post-title">
+                            {{ blog.title }}
+                        </h2>
+                        <h3 class="post-subtitle">
+                            <!-- {{ blog.content }} -->
+                        </h3>
+                    </a>
+                    <p class="post-meta">Posted by <a href="#">{{ blog.author }}</a> on {{ blog.publish_time }} </p>
+                </div>
+                <hr>
+                {% endfor %}
+                <ul class="pager">
+                    {% if pre_page %}
+                    <li class="previous">
+                        <a href="{% url 'blog_page' page|add:"-1" %}"><font color="#404040">&larr; Previous Page</font></a>
+                    </li>
+                    {% endif %}
+                    {% if next_page %}
+                    <li class="next">
+                        <a href="{% url 'blog_page' page|add:"1" %}"><font color="#404040">Next Page &rarr;</font></a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+{% endblock %}
